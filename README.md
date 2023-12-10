@@ -13,14 +13,12 @@ Make sure you have the following software installed on your system:<br>
 
 <h3>Installation Steps</h3>
 1. Clone the Repository<br>
-bashCopy code<br>
 git clone https://github.com/your-username/doctor_appointments.git<br>
 cd doctor_appointments<br>
-Save to grepper<br><br>
+<br>
 2. Install Dependencies<br>
-bashCopy code<br>
 bundle install<br>
-Save to grepper<br><br>
+<br>
 3. Configure Database<br>
 Update the config/database.yml file with the appropriate database configuration for MySQL Lite:<br>
 yamlCopy code<br>
@@ -30,23 +28,20 @@ default: &default<br>
   timeout: 5000<br>
 development:<br>
   <<: *default<br>
-  database: db/development.sqlite3<br>
-Add similar configurations for test and production environments<br>
-Save to grepper<br><br>
+  database: db/development.sqlite3<br><br>
+Add similar configurations for test and production environments<br><br>
+<br>
 4. Create and Migrate the Database<br>
-bashCopy code<br>
 rails db:create<br>
 rails db:migrate<br>
-Save to grepper<br><br>
+<br>
 5. Seed the Database (Optional)<br>
 If you want to populate the database with sample data:<br>
-bashCopy code<br>
 rails db:seed<br>
-Save to grepper<br><br>
+<br>
 6. Start the Rails Server<br>
-bashCopy code<br>
 rails server<br>
-Save to grepper<br><br>
+<br>
 
 <b>The application should now be running locally at http://localhost:3000.</b><br>
 
