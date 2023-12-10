@@ -1,0 +1,27 @@
+<%= form_for :user, url: user_roles_path, method: :patch do |f| %>
+
+  <div class="field">
+    <%= f.label :user_id, 'User' %><br />
+    <%= f.collection_select :user_id, User.all, :id, :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name, 'Name' %><br />
+    <%= f.text_area :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :surname, 'Surname' %><br />
+    <%= f.text_area :surname %>
+  </div>
+
+  <div class="field">
+    <%= f.label :role %><br />
+    <%= f.select :role, User.roles.keys %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit 'Update' %>
+  </div>
+<% end %>

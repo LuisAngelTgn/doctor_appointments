@@ -1,0 +1,76 @@
+<style>
+    a {
+        color: white !important;
+    }
+
+    .users_login a {
+        color: black !important;
+    }
+
+    .btn-outline-info {
+        background-color: #137191;
+    }
+
+    .btn-outline-info a {
+        color: white !important;
+    }
+
+    .btn-outline-info:hover {
+        background-color: #137191;
+    }
+
+    .users_login {
+        text-align-last: center;
+    }
+
+    .modal-header {
+        border-bottom: solid 4px #137191;
+    }
+
+
+</style>
+
+
+<nav class="nav" style="background-color: #137191;">
+  <a class="nav-link active" aria-current="page" href="/">Home</a>
+  <% if current_user.present? %>
+    <% if current_user.role == "doctor" %>
+      <%= link_to "See appointments", appointments_path, class: "nav-link" %>
+    <% end %>
+    <% if current_user.role == "patient" %>
+      <%= link_to "See your appointments", appointments_path, class: "nav-link" %>
+      <%= link_to "Book an appointment", new_appointment_path, class: "nav-link" %>
+    <% end %>
+    <% if current_user.role == "admin" %>
+      <%= link_to "Edit user", edit_user_roles_path, class: "nav-link" %>
+    <% end %>
+  <% end %>
+  <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Log In / Sign Up</a>
+</nav>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Welcome</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body users_login">
+        <% if signed_in? %>
+          <%= form_tag(destroy_user_session_path, method: :delete) do %>
+            <%= submit_tag "Exit", class: "nav-link", data: { confirm: 'Are you sure you want to log out?' } %>
+          <% end %>
+        <% else %>
+          <h8>If you are not registered:</h8>
+          <br>
+          <button type="button" class="btn btn-outline-info"> <%= link_to "Sign Up", new_user_registration_path, style: "text-decoration:none;" %></button>
+          </br>
+          </br>
+          <h8>If you have an account:</h8>
+          <br>
+          <button type="button" class="btn btn-outline-info">  <%= link_to "Log In", new_user_session_path, style: "text-decoration:none;" %></button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

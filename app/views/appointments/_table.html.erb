@@ -1,0 +1,58 @@
+<style>
+    .table-group-divider a {
+        color: black !important;
+    }
+
+    td, th {
+        border: 1px solid black;
+        padding: 10px;
+    }
+
+    .btn-outline-info {
+        background-color: #137191;
+    }
+
+    .btn-outline-info a {
+        color: white !important;
+    }
+
+    .btn-outline-info:hover {
+        background-color: #137191;
+    }
+</style>
+
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Scheduled At</th>
+    <th>Description</th>
+    <% if current_user.role == "patient" %>
+      <th>Doctor</th>
+    <% elsif current_user.role == "doctor" %>
+      <th>Patient</th>
+    <% end %>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody class="table-group-divider">
+  <% @appointments.each do |appointment| %>
+    <tr>
+      <td><%= appointment.scheduled_at %></td>
+      <td><%= appointment.description %></td>
+      <% if current_user.role == "patient" %>
+        <td><%= appointment.doctor.name %></td>
+      <% elsif current_user.role == "doctor" %>
+        <td><%= appointment.patient.name %></td>
+      <% end %>
+      <td>
+        <button type="button" class="btn btn-outline-success" style="float:left;"> <%= link_to 'Show', appointment_path(appointment), style: "text-decoration:none; " %> </button>
+        <%= button_to 'Delete', appointment_path(appointment), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
+
+        <!--        <%#= link_to 'Edit', edit_appointment_path(appointment) %> |-->
+
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

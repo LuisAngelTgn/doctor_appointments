@@ -1,0 +1,87 @@
+<style>
+    .actions a {
+        color: black !important;
+    }
+</style>
+
+<%= form_for @appointment do |f| %>
+  <%= f.hidden_field :patient_id, value: current_user.id %>
+  <%= f.hidden_field :doctor_id, id: 'selected-doctor-id' %>
+
+
+  <div class="form-group">
+    <%= f.label :scheduled_at %><br/>
+    <%= f.datetime_field :scheduled_at %>
+  </div>
+
+  <br>
+
+  <div class="form-group">
+    <%= f.label :description %><br/>
+    <%= f.text_area :description %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= f.label :pictures %><br>
+    <%= f.file_field :pictures, multiple: true, prompt: "Choose files"  %>
+  </div>
+  <br>
+
+  <h4>Find a doctor:</h4>
+  <div class="form-group">
+    <%= f.label :doctor_name_search %>:<br/>
+    <%= text_field_tag :doctor_name_search, nil, placeholder: "Enter doctor's name", class: 'doctor-search-input' %>
+  </div>
+  <div class="form-group">
+    <%= label_tag 'city_search', 'City:' %><br/>
+    <%= text_field_tag 'city_search', nil, placeholder: "Enter city", class: 'city-search-input' %>
+  </div>
+  <br>
+  <%= button_tag 'Search for a doctor', class: 'btn btn-primary search-doctor-btn' %>
+  <br>
+  <br>
+  <div id="doctor-search-results">
+    <%= render partial: 'doctor_search_results' %>
+  </div>
+
+
+  <br>
+  <br>
+  <!--  <div class="actions">-->
+  <%#= f.submit %>
+  <!--  </div>-->
+<% end %>
+
+<script>
+    $(document).ready(function () {
+        $('.search-doctor-btn').on('click', function (event) {
+            event.preventDefault();
+
+            var doctorName = $('.doctor-search-input').val();
+            var city = $('.city-search-input').val();
+
+            $.ajax({
+                url: '/appointments/doctors_search',
+                method: 'GET',
+                data: {doctor_name: doctorName, city: city},
+                dataType: 'html',
+                success: function (html) {
+                    $('#doctor-search-results').html(html);
+                },
+                error: function (error) {
+                    console.error('Error trying to find a doctor:', error);
+                }
+            });
+        });
+
+        $('#doctor-search-results').on('click', '.accept-doctor-btn', function () {
+            var selectedDoctorId = $(this).data('doctor-id');
+            $('#selected-doctor-id').val(selectedDoctorId);
+            console.log($('#selected-doctor-id').val(selectedDoctorId))
+        });
+
+    });
+
+</script>
+

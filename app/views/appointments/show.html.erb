@@ -1,0 +1,50 @@
+<style>
+    .my_links a {
+        color: black !important;
+    }
+
+    .btn-outline-info {
+        background-color: #137191;
+    }
+
+    .btn-outline-info a {
+        color: white !important;
+    }
+
+    .btn-outline-info:hover {
+        background-color: #137191;
+    }
+</style>
+<br>
+<h1 class="display-5">Appointment</h1>
+
+<div class="card border-secondary mb-3" style="max-width: 60rem;">
+  <div class="card-header">
+    <% if current_user.role == "patient" %>
+      <p><strong>Doctor:</strong> <%= @doctor_name.name + ' ' + @doctor_name.surname %></p>
+    <% elsif current_user.role == "doctor" %>
+      <p><strong>Patient:</strong> <%= @patient_name.name + ' ' + @patient_name.surname %></p>
+    <% end %></div>
+  <div class="card-body text-secondary">
+    <h5 class="card-title"><strong>Scheduled At:</strong> <%= @appointment.scheduled_at %></h5>
+    <p class="card-text"><%= @appointment.description %></p>
+  </div>
+
+  <div class="card-group">
+  <% @appointment.pictures.each do |picture| %>
+      <div class="card">
+        <%= link_to image_tag(picture, style: "width:100%"), picture %>
+        <div class="card-body">
+        </div>
+      </div>
+  <% end %>
+  </div>
+
+</div>
+
+<br>
+<div class="my_links">
+  <!--  <%#= link_to 'Edit', edit_appointment_path(@appointment) %> |-->
+  <button type="button" class="btn btn-outline-info"> <%= link_to 'Back', appointments_path, style: "text-decoration:none; " %> </button>
+</div>
+

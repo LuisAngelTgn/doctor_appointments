@@ -1,0 +1,33 @@
+<style>
+  .card-img-top{
+      width: 150px;
+  }
+  .card-star-top{
+      width: 25px;
+  }
+</style>
+
+<% if @doctors.present? %>
+  <div class="row">
+    <% @doctors.each do |doctor| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="<%= image_path('User.jpg') %>" class="card-img-top" alt="Doctor Image">
+          <div class="card-body">
+            <h5 class="card-title">Dr. <%= doctor.name %></h5>
+            <p class="card-text"><%= doctor.city %></p>
+            <div class="rating">
+              <% 5.times do %>
+              <img src="<%= image_path('star.png') %>" class="card-star-top" alt="Rating">
+                <% end %>
+            </div>
+            <br>
+            <%= button_tag 'Create appointment', type: 'submit', class: 'accept-doctor-btn', 'data-doctor-id' => doctor.id %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No se encontraron resultados</p>
+<% end %>

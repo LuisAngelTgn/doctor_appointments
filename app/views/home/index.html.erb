@@ -1,0 +1,76 @@
+<style>
+
+    .btn-outline-info {
+        background-color: #137191;
+    }
+
+    .btn-outline-info a {
+        color: white !important;
+    }
+
+    .btn-outline-info:hover {
+        background-color: #137191;
+    }
+
+
+</style>
+
+<br>
+<h1 class="display-5">Doctor appointments</h1>
+<% if signed_in? %>
+  <% if current_user.name.present? && current_user.surname.present? %>
+    <div class="card" style="width: 50rem;">
+      <div class="card-body">
+        <h5 class="card-title">Hello <%= current_user.name + ' ' + current_user.surname %> </h5>
+        <h6>You're logged in as a <%= current_user.role %></h6>
+        <br>
+        <% if current_user.role == "patient" %>
+          <p class="card-text"> As a patient you can create and view your own appointments.</p>
+          <button type="button" class="btn btn-outline-info"> <%= link_to "Book an appointment", new_appointment_path, style: "text-decoration:none;" %></button>
+          <button type="button" class="btn btn-outline-info"> <%= link_to "See appointments", appointments_path, style: "text-decoration:none;" %></button>
+        <% elsif current_user.role == "doctor" %>
+          <p class="card-text">As a doctor you can see your appointments information.</p>
+          <button type="button" class="btn btn-outline-info"> <%= link_to "See appointments", appointments_path, style: "text-decoration:none;" %></button>
+        <% else %>
+          <p class="card-text">As an administrator you can edit users names, surnames and change their role.</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-6">
+        <h4>Administrator:</h4>
+        <p class="text-muted">Sign up as an administrator to manage user roles.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <h4>Doctors and Patients:</h4>
+        <p class="text-muted">Doctors and patients can sign up and log in.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <h4>Doctors:</h4>
+        <p class="text-muted">Doctors can view appointments.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <h4>Patients:</h4>
+        <p class="text-muted">Patients can create appointments and view their own appointments.</p>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <button type="button" class="btn btn-outline-info">
+    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Log In / Sign
+      Up</a></button>
+
+<% end %>
