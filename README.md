@@ -55,11 +55,18 @@ Save to grepper
 The application should now be running locally at http://localhost:3000.
 
 Usage
+
+
     • Visit http://localhost:3000 in your web browser.
+    
     • Sign up as an administrator to manage user roles.
+    
     • Doctors and patients can sign up and log in.
+    
     • Doctors can view appointments.
+    
     • Patients can create appointments and view their own appointments.
+    
     • Accounts made for tests purposes (you can create more accounts in the Sign Up option):
         ◦ Administrator: admin1@gmail.com / 123456
         ◦ Patient: patient_1@gmail.com / 123456
