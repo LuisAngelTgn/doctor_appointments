@@ -35,7 +35,7 @@ default: &default
 development:
   <<: *default
   database: db/development.sqlite3
-# Add similar configurations for test and production environments
+Add similar configurations for test and production environments
 Save to grepper
 4. Create and Migrate the Database
 bashCopy code
