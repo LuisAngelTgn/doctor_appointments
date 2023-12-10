@@ -3,9 +3,13 @@
 Setting up a Ruby on Rails Appointment Management Application
 
 Introduction
+
+
 This guide provides step-by-step instructions on how to set up a local instance of a Ruby on Rails application for managing doctor-patient appointments. The application uses MySQL Lite as the database. The roles include doctors, patients, and administrators.
 
 Prerequisites
+
+
 Make sure you have the following software installed on your system:
     • Ruby (version 3.2.0)
     • Ruby on Rails (version 7.0.8)
